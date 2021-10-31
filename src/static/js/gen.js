@@ -25,7 +25,10 @@ function setup() {
   cnv.parent('gifcanvas');
   textFont(font);
   angleMode(DEGREES);
+  setupGIF();
+}
 
+function start() {
   color1 = select('#color1').elt.value
   color2 = select('#color2').elt.value
   txt = select('#text').elt.value
@@ -38,7 +41,15 @@ function setup() {
   }
 
   interval_id = setInterval(doit2, 40);
-  setupGIF();
+  interval_elem = select('#interval')
+  interval_elem.elt.value = interval_id
+}
+
+function stop() {
+  interval_elem = select('#interval')
+  interval_id = interval_elem.elt.value
+  clearInterval(interval_id)
+
 }
 
 function doit(color1, color2, txt, fcolor, scolor, size_delta, preview) {
