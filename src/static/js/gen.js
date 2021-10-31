@@ -22,26 +22,32 @@ function preload(){
 function setup() {
   noLoop();
   cnv = createCanvas(200, 200);
+  cnv.parent('gifcanvas');
   textFont(font);
   angleMode(DEGREES);
-  interval_id = setInterval(doit, 40);
+
+  color1 = select('#color1').elt.value
+  color2 = select('#color2').elt.value
+  txt = select('#text').elt.value
+  fcolor = select('#fcolor').elt.value
+  scolor = select('#scolor').elt.value
+  size_delta = select('#size_delta').elt.value
+  preview = true;
+  function doit2(){
+    doit(color1, color2, txt, fcolor, scolor, size_delta, preview)
+  }
+
+  interval_id = setInterval(doit2, 40);
   setupGIF();
 }
 
-function doit() {
-  color1 = "#009600"
-  color2 = "#00ff00"
-  txt = "TY"
-  fcolor = "#ffffff"
-  scolor = "#000000"
-  size_delta = 20
-  preview = true;
+function doit(color1, color2, txt, fcolor, scolor, size_delta, preview) {
 
   // background
-  pinwheel(width / 2, height / 2, 500, idx*6, color1, color2);
+  pinwheel(width / 2, height / 2, 300, idx*6, color1, color2);
 
   // text
-  drawtext(width / 2, height / 2, idx, txt, fcolor, scolor)
+  drawtext(width / 2, height / 2, idx, txt, fcolor, scolor, size_delta)
 
   
   if (!preview) {
@@ -64,7 +70,7 @@ function doit() {
 
 
 
-function drawtext(x, y, idx, txt, fcolor, scolor){
+function drawtext(x, y, idx, txt, fcolor, scolor, size_delta){
   textSize(sizex[idx] - size_delta);
   textAlign(CENTER, CENTER);
   bbox = font.textBounds(txt, x, y - 10 )
