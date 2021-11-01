@@ -52,6 +52,26 @@ function stop() {
 
 }
 
+function saveemoji() {
+  stop()
+  idx = 0
+  color1 = select('#color1').elt.value
+  color2 = select('#color2').elt.value
+  txt = select('#text').elt.value
+  fcolor = select('#fcolor').elt.value
+  scolor = select('#scolor').elt.value
+  size_delta = select('#size_delta').elt.value
+  preview = false;
+  function doit2(){
+    doit(color1, color2, txt, fcolor, scolor, size_delta, preview)
+  }
+
+  interval_id = setInterval(doit2, 40);
+  interval_elem = select('#interval')
+  interval_elem.elt.value = interval_id
+}
+
+
 function doit(color1, color2, txt, fcolor, scolor, size_delta, preview) {
 
   // background
@@ -119,7 +139,8 @@ function pinwheel(x, y, arcsize, step, color1, color2) {
 function setupGIF() {
   gif = new GIF({
       workers: 5,
-      quality: 20
+      quality: 20,
+      workerScript: "static/js/gif.worker.js"
   });
   gif.on('finished', function(blob) {
       window.open(URL.createObjectURL(blob));
