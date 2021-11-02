@@ -1,4 +1,4 @@
-# pulsed-pinwheel-emoji
+# 60frames
 
 This will generate emojis of this style while allowing the user to select the background colors, text colors and text.
 
