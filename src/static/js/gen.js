@@ -144,5 +144,10 @@ function setupGIF() {
   });
   gif.on('finished', function(blob) {
       window.open(URL.createObjectURL(blob));
+      gif.abort();
+      gif.frames = [];
+      delete gif.imageParts;
+      delete gif.finishedFrames;
+      delete gif.nextFrame;
   });
 }
