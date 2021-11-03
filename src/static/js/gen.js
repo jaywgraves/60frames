@@ -5,10 +5,13 @@ let sm_angle = 25;
 let lg_angle = 35;
 let interval_id = 0;
 let font;
-let rotatex = [0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15,  
-               -14, -13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 
-              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 
-              14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+// uses a sin wave now but could also add a triangle wave
+function get_rotation(idx){
+  a = 15;h=Math.PI;b=1;k=0;
+  x = ((2*Math.PI)/60)*idx;
+  return a * Math.sin((x-h)/b) + k;
+}
 
 let sizex = [140, 139, 138, 137, 136, 135, 134, 133, 132, 131, 130, 129, 128, 127, 126,
              126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140,
@@ -113,7 +116,7 @@ function drawtext(x, y, idx, txt, fcolor, scolor, size_delta){
   dx = bbox.x + (bbox.w / 2)
   dy = bbox.y + (bbox.h / 2)
   translate(dx , dy)
-  rotate(rotatex[idx])
+  rotate(get_rotation(idx))
   translate(-dx , -dy)
   text(txt, x, y - 10);
   pop()
