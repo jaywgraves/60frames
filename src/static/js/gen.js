@@ -6,11 +6,16 @@ let lg_angle = 35;
 let interval_id = 0;
 let font;
 
-// uses a sin wave now but could also add a triangle wave
-function get_rotation(idx){
+function get_rotation_sin(idx){
   a = 15;h=Math.PI;b=1;k=0;
   x = ((2*Math.PI)/60)*idx;
   return a * Math.sin((x-h)/b) + k;
+}
+
+function get_rotation_tri(idx){
+  a = 15;h=Math.PI;b=1;k=0
+  x = ((2*Math.PI)/60)*idx;
+  return (2*a)/Math.PI * (Math.asin(Math.sin(x + h))) + k;
 }
 
 let sizex = [140, 139, 138, 137, 136, 135, 134, 133, 132, 131, 130, 129, 128, 127, 126,
@@ -116,7 +121,8 @@ function drawtext(x, y, idx, txt, fcolor, scolor, size_delta){
   dx = bbox.x + (bbox.w / 2)
   dy = bbox.y + (bbox.h / 2)
   translate(dx , dy)
-  rotate(get_rotation(idx))
+  //rotate(get_rotation_sin(idx))
+  rotate(get_rotation_tri(idx))
   translate(-dx , -dy)
   text(txt, x, y - 10);
   pop()
