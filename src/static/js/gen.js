@@ -6,16 +6,14 @@ let lg_angle = 35;
 let interval_id = 0;
 let font;
 
-function get_rotation_sin(idx){
-  a = 15;h=Math.PI;b=1;k=0;
+function get_sin(idx, a, k){
   x = ((2*Math.PI)/60)*idx;
-  return a * Math.sin((x-h)/b) + k;
+  return a * Math.sin(x-Math.PI) + k;
 }
 
-function get_rotation_tri(idx){
-  a = 15;h=Math.PI;b=1;k=0
+function get_tri(idx, a, k){
   x = ((2*Math.PI)/60)*idx;
-  return (2*a)/Math.PI * (Math.asin(Math.sin(x + h))) + k;
+  return (2*a)/Math.PI * (Math.asin(Math.sin(x + Math.PI))) + k;
 }
 
 let sizex = [140, 139, 138, 137, 136, 135, 134, 133, 132, 131, 130, 129, 128, 127, 126,
@@ -121,8 +119,8 @@ function drawtext(x, y, idx, txt, fcolor, scolor, size_delta){
   dx = bbox.x + (bbox.w / 2)
   dy = bbox.y + (bbox.h / 2)
   translate(dx , dy)
-  //rotate(get_rotation_sin(idx))
-  rotate(get_rotation_tri(idx))
+  //rotate(get_sin(idx, 15, 0))
+  rotate(get_tri(idx, 15, 0))
   translate(-dx , -dy)
   text(txt, x, y - 10);
   pop()
