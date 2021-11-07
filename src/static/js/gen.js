@@ -16,11 +16,6 @@ function get_tri(idx, a, k){
   return (2*a)/Math.PI * (Math.asin(Math.sin(x + Math.PI))) + k;
 }
 
-let sizex = [140, 139, 138, 137, 136, 135, 134, 133, 132, 131, 130, 129, 128, 127, 126,
-             126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140,
-             140, 139, 138, 137, 136, 135, 134, 133, 132, 131, 130, 129, 128, 127, 126,
-             126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140]
-
 function preload(){
   font = loadFont('static/fonts/Ubuntu-B.ttf');
 }
@@ -108,7 +103,7 @@ function doit(color1, color2, txt, fcolor, scolor, size_delta, preview) {
 
 
 function drawtext(x, y, idx, txt, fcolor, scolor, size_delta){
-  textSize(sizex[idx] - size_delta);
+  textSize(get_tri(idx, 15, 140) - size_delta);
   textAlign(CENTER, CENTER);
   bbox = font.textBounds(txt, x, y - 10 )
 
