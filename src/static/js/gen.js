@@ -35,10 +35,11 @@ function start() {
   txt = select('#text').elt.value
   fcolor = select('#fcolor').elt.value
   scolor = select('#scolor').elt.value
-  size_delta = select('#size_delta').elt.value
+  txtstart = parseInt(select('#txtstart').elt.value)
+  txtamp = parseInt(select('#txtamp').elt.value)
   preview = true;
   function doit2(){
-    doit(color1, color2, txt, fcolor, scolor, size_delta, preview)
+    doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp , preview)
   }
 
   interval_id = setInterval(doit2, 40);
@@ -61,10 +62,11 @@ function saveemoji() {
   txt = select('#text').elt.value
   fcolor = select('#fcolor').elt.value
   scolor = select('#scolor').elt.value
-  size_delta = select('#size_delta').elt.value
+  txtstart = parseInt(select('#txtstart').elt.value)
+  txtamp = parseInt(select('#txtamp').elt.value)
   preview = false;
   function doit2(){
-    doit(color1, color2, txt, fcolor, scolor, size_delta, preview)
+    doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp , preview)
   }
 
   interval_id = setInterval(doit2, 40);
@@ -73,13 +75,13 @@ function saveemoji() {
 }
 
 
-function doit(color1, color2, txt, fcolor, scolor, size_delta, preview) {
+function doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp, preview) {
 
   // background
   pinwheel(width / 2, height / 2, 300, idx*6, color1, color2);
 
   // text
-  drawtext(width / 2, height / 2, idx, txt, fcolor, scolor, size_delta)
+  drawtext(width / 2, height / 2, idx, txt, fcolor, scolor, txtstart, txtamp)
 
   
   if (!preview) {
@@ -102,8 +104,8 @@ function doit(color1, color2, txt, fcolor, scolor, size_delta, preview) {
 
 
 
-function drawtext(x, y, idx, txt, fcolor, scolor, size_delta){
-  textSize(get_tri(idx, 15, 140) - size_delta);
+function drawtext(x, y, idx, txt, fcolor, scolor, txtstart, txtamp ){
+  textSize(get_tri(idx, txtamp, txtstart));
   textAlign(CENTER, CENTER);
   bbox = font.textBounds(txt, x, y - 10 )
 
