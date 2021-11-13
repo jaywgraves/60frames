@@ -107,7 +107,7 @@ function doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp, preview) {
 function drawtext(x, y, idx, txt, fcolor, scolor, txtstart, txtamp ){
   textSize(get_tri(idx, txtamp, txtstart, 0));
   textAlign(CENTER, CENTER);
-  bbox = font.textBounds(txt, x, y - 10 )
+  bbox = font.textBounds(txt, x, y )
 
   stroke(scolor);
   strokeWeight(10);
@@ -118,7 +118,7 @@ function drawtext(x, y, idx, txt, fcolor, scolor, txtstart, txtamp ){
   translate(dx , dy)
   rotate(get_tri(idx, 15, 0, 0))
   translate(-dx , -dy)
-  text(txt, x, y - 10);
+  text(txt, x, y);
   pop()
 }
 
