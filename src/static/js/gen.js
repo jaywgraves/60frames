@@ -6,14 +6,14 @@ let lg_angle = 35;
 let interval_id = 0;
 let font;
 
-function get_sin(idx, a, k){
+function get_sin(idx, a, k, h){
   x = ((2*Math.PI)/60)*idx;
-  return a * Math.sin(x-Math.PI) + k;
+  return a * Math.sin(x+h) + k;
 }
 
-function get_tri(idx, a, k){
+function get_tri(idx, a, k, h){
   x = ((2*Math.PI)/60)*idx;
-  return (2*a)/Math.PI * (Math.asin(Math.sin(x + Math.PI))) + k;
+  return (2*a)/Math.PI * (Math.asin(Math.sin(x + h))) + k;
 }
 
 function preload(){
@@ -105,7 +105,7 @@ function doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp, preview) {
 
 
 function drawtext(x, y, idx, txt, fcolor, scolor, txtstart, txtamp ){
-  textSize(get_tri(idx, txtamp, txtstart));
+  textSize(get_tri(idx, txtamp, txtstart, 0));
   textAlign(CENTER, CENTER);
   bbox = font.textBounds(txt, x, y - 10 )
 
@@ -116,8 +116,7 @@ function drawtext(x, y, idx, txt, fcolor, scolor, txtstart, txtamp ){
   dx = bbox.x + (bbox.w / 2)
   dy = bbox.y + (bbox.h / 2)
   translate(dx , dy)
-  //rotate(get_sin(idx, 15, 0))
-  rotate(get_tri(idx, 15, 0))
+  rotate(get_tri(idx, 15, 0, 0))
   translate(-dx , -dy)
   text(txt, x, y - 10);
   pop()
