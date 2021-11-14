@@ -37,9 +37,10 @@ function start() {
   scolor = select('#scolor').elt.value
   txtstart = parseInt(select('#txtstart').elt.value)
   txtamp = parseInt(select('#txtamp').elt.value)
+  rotamp = parseInt(select('#rotamp').elt.value)
   preview = true;
   function doit2(){
-    doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp , preview)
+    doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp, rotamp, preview)
   }
 
   interval_id = setInterval(doit2, 40);
@@ -64,9 +65,10 @@ function saveemoji() {
   scolor = select('#scolor').elt.value
   txtstart = parseInt(select('#txtstart').elt.value)
   txtamp = parseInt(select('#txtamp').elt.value)
+  rotamp = parseInt(select('#rotamp').elt.value)
   preview = false;
   function doit2(){
-    doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp , preview)
+    doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp, rotamp, preview)
   }
 
   interval_id = setInterval(doit2, 40);
@@ -75,13 +77,13 @@ function saveemoji() {
 }
 
 
-function doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp, preview) {
+function doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp, rotamp, preview) {
 
   // background
   pinwheel(width / 2, height / 2, 300, idx*6, color1, color2);
 
   // text
-  drawtext(width / 2, height / 2, idx, txt, fcolor, scolor, txtstart, txtamp)
+  drawtext(width / 2, height / 2, idx, txt, fcolor, scolor, txtstart, txtamp, rotamp)
 
   
   if (!preview) {
@@ -104,7 +106,7 @@ function doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp, preview) {
 
 
 
-function drawtext(x, y, idx, txt, fcolor, scolor, txtstart, txtamp ){
+function drawtext(x, y, idx, txt, fcolor, scolor, txtstart, txtamp, rotamp ){
   textSize(get_tri(idx, txtamp, txtstart, 0));
   textAlign(CENTER, CENTER);
   stroke(scolor);
@@ -115,7 +117,7 @@ function drawtext(x, y, idx, txt, fcolor, scolor, txtstart, txtamp ){
   dx = bbox.x + (bbox.w / 2)
   dy = bbox.y + (bbox.h / 2)
   translate(dx , dy)
-  rotate(get_tri(idx, 15, 0, 0))
+  rotate(get_tri(idx, rotamp, 0, 0))
   translate(-dx , -dy)
   //rect(bbox.x, bbox.y, bbox.w, bbox.h)  //debug bounding box
   text(txt, x, y);
