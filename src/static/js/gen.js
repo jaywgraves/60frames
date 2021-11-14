@@ -1,8 +1,6 @@
 var cnv;
 var gif;
 let idx = 0;
-let sm_angle = 25;
-let lg_angle = 35;
 let interval_id = 0;
 let font;
 
@@ -80,7 +78,7 @@ function saveemoji() {
 function doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp, rotamp, preview) {
 
   // background
-  pinwheel(width / 2, height / 2, 300, idx*6, color1, color2);
+  drawbackground(width / 2, height / 2, 300, idx*6, color1, 25, color2, 35);
 
   // text
   drawtext(width / 2, height / 2, idx, txt, fcolor, scolor, txtstart, txtamp, rotamp)
@@ -124,7 +122,7 @@ function drawtext(x, y, idx, txt, fcolor, scolor, txtstart, txtamp, rotamp ){
   pop()
 }
 
-function pinwheel(x, y, arcsize, step, color1, color2) {
+function drawbackground(x, y, arcsize, step, color1, sm_angle, color2, lg_angle) {
   // draws 12 arcs, varying between color1/sm_angle and color2/lg_angle
   // starting at a specific angular degree of 'step'
   // and a circle of color2 in the middle of the canvas
