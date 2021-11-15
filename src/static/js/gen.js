@@ -27,20 +27,24 @@ function setup() {
   setupGIF();
 }
 
+function get_params() {
+  params = {};
+  params.color1 = select('#color1').elt.value
+  params.color2 = select('#color2').elt.value
+  params.txt = select('#text').elt.value
+  params.fcolor = select('#fcolor').elt.value
+  params.scolor = select('#scolor').elt.value
+  params.txtstart = parseInt(select('#txtstart').elt.value)
+  params.txtamp = parseInt(select('#txtamp').elt.value)
+  params.rotamp = parseInt(select('#rotamp').elt.value)
+  return params
+}
+
 function start() {
-  color1 = select('#color1').elt.value
-  color2 = select('#color2').elt.value
-  txt = select('#text').elt.value
-  fcolor = select('#fcolor').elt.value
-  scolor = select('#scolor').elt.value
-  txtstart = parseInt(select('#txtstart').elt.value)
-  txtamp = parseInt(select('#txtamp').elt.value)
-  rotamp = parseInt(select('#rotamp').elt.value)
   preview = true;
   function doit2(){
-    doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp, rotamp, preview)
+    doit(null, preview)
   }
-
   interval_id = setInterval(doit2, 40);
   interval_elem = select('#interval')
   interval_elem.elt.value = interval_id
@@ -50,23 +54,15 @@ function stop() {
   interval_elem = select('#interval')
   interval_id = interval_elem.elt.value
   clearInterval(interval_id)
-
 }
 
 function saveemoji() {
   stop()
   idx = 0
-  color1 = select('#color1').elt.value
-  color2 = select('#color2').elt.value
-  txt = select('#text').elt.value
-  fcolor = select('#fcolor').elt.value
-  scolor = select('#scolor').elt.value
-  txtstart = parseInt(select('#txtstart').elt.value)
-  txtamp = parseInt(select('#txtamp').elt.value)
-  rotamp = parseInt(select('#rotamp').elt.value)
+  params = get_params();
   preview = false;
   function doit2(){
-    doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp, rotamp, preview)
+    doit(params, preview)
   }
 
   interval_id = setInterval(doit2, 40);
@@ -75,15 +71,16 @@ function saveemoji() {
 }
 
 
-function doit(color1, color2, txt, fcolor, scolor, txtstart, txtamp, rotamp, preview) {
-
+function doit(params, preview) {
+  if (!params) {
+    params = get_params()
+  }
   // background
-  drawbackground(width / 2, height / 2, 300, idx*6, color1, 25, color2, 35);
+  drawbackground(width / 2, height / 2, 300, idx*6, params.color1, 25, params.color2, 35);
 
   // text
-  drawtext(width / 2, height / 2, idx, txt, fcolor, scolor, txtstart, txtamp, rotamp)
+  drawtext(width / 2, height / 2, idx, params.txt, params.fcolor, params.scolor, params.txtstart, params.txtamp, params.rotamp)
 
-  
   if (!preview) {
   gif.addFrame(cnv.elt, {
             delay: 40,
