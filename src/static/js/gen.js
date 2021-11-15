@@ -97,10 +97,6 @@ function doit(params, preview) {
   }
 }
 
-
-
-
-
 function drawtext(x, y, idx, txt, fcolor, scolor, txtstart, txtamp, rotamp ){
   textSize(get_tri(idx, txtamp, txtstart, 0));
   textAlign(CENTER, CENTER);
