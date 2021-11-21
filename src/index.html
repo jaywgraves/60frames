@@ -10,6 +10,18 @@
       padding: 10;
       margin: 10;
     }
+    .container {
+      display: grid;
+      grid-template-columns: 30% 3fr 1fr 30%;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      gap: 0px 0px;
+      }
+    #left-col {
+       grid-column-start: 2;
+       }
+    #right-col {
+       grid-column-start: 3;
+       }
   </style>
   <script src="static/js/p5.min.js"></script>
   <script src="static/js/gen.js"></script>
@@ -18,21 +30,26 @@
 </head>
 
 <body>
-    <input type="text" id="color1" size="7" maxlength="7" value="#009600" class="watch">
-    <input type="text" id="color2" size="7" maxlength="7" value="#00ff00" class="watch">
-    <input type="text" id="text" size="10" maxlength="10" value="TY" class="watch">
-    <input type="text" id="fcolor" size="7" maxlength="7" value="#ffffff" class="watch">
-    <input type="text" id="scolor" size="7" maxlength="7" value="#000000" class="watch">
-    <input type="text" id="txtstart" size="10" maxlength="10" value="140" class="watch">
-    <input type="text" id="txtamp" size="10" maxlength="10" value="15" class="watch">
-    <input type="text" id="rotamp" size="10" maxlength="10" value="15" class="watch">
-
+    <section class="container">
+    <div id="left-col">
     <div id="gifcanvas">
     </div>
     <input type="hidden" id="interval" size="10" maxlength="10" value="">
     <input type="button" id="start" value="start" onclick="start()">
     <input type="button" id="stop" value="stop" onclick="stop()">
     <input type="button" id="save" value="save" onclick="saveemoji()">
+    </div>
+    <div id="right-col">
+    <input type="text" id="text" size="10" maxlength="10" value="TY" class="watch">
+    <input type="color" id="color1" size="7" maxlength="7" value="#009600" class="watch">
+    <input type="color" id="color2" size="7" maxlength="7" value="#00ff00" class="watch">
+    <input type="color" id="fcolor" size="7" maxlength="7" value="#ffffff" class="watch">
+    <input type="color" id="scolor" size="7" maxlength="7" value="#000000" class="watch">
+    <input type="text" id="txtstart" size="10" maxlength="10" value="140" class="watch">
+    <input type="text" id="txtamp" size="10" maxlength="10" value="15" class="watch">
+    <input type="text" id="rotamp" size="10" maxlength="10" value="15" class="watch">
+    </div>
+
 </body>
 
 </html>
