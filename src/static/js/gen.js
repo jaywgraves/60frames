@@ -31,7 +31,7 @@ function get_params() {
   params = {};
   params.color1 = select('#color1').elt.value
   params.color2 = select('#color2').elt.value
-  params.txt = select('#text').elt.value
+  params.txt = select('#inptext').elt.value
   params.fcolor = select('#fcolor').elt.value
   params.scolor = select('#scolor').elt.value
   params.txtstart = parseInt(select('#txtstart').elt.value)

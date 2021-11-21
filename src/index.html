@@ -12,8 +12,7 @@
     }
     .container {
       display: grid;
-      grid-template-columns: 30% 3fr 1fr 30%;
-      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 30% 1fr 1fr 30%;
       gap: 0px 0px;
       }
     #left-col {
@@ -22,6 +21,18 @@
     #right-col {
        grid-column-start: 3;
        }
+    .param-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+    }
+    .param-row label {
+      grid-column-start: 1;
+    }
+    .param-row input {
+      grid-column-start: 2;
+
+    }
   </style>
   <script src="static/js/p5.min.js"></script>
   <script src="static/js/gen.js"></script>
@@ -30,6 +41,7 @@
 </head>
 
 <body>
+    <center><h1>60 Frames</h1></center>
     <section class="container">
     <div id="left-col">
     <div id="gifcanvas">
@@ -40,14 +52,38 @@
     <input type="button" id="save" value="save" onclick="saveemoji()">
     </div>
     <div id="right-col">
-    <input type="text" id="text" size="10" maxlength="10" value="TY" class="watch">
+    <div class="param-row">
+    <label for="inptext">Text</label>
+    <input type="text" id="inptext" size="10" maxlength="10" value="TY" class="watch">
+    </div>
+    <div class="param-row">
+    <label for="color1">Color 1</label>
     <input type="color" id="color1" size="7" maxlength="7" value="#009600" class="watch">
+    </div>
+    <div class="param-row">
+    <label for="color2">Color 2</label>
     <input type="color" id="color2" size="7" maxlength="7" value="#00ff00" class="watch">
+    </div>
+    <div class="param-row">
+    <label for="fcolor">Text Color</label>
     <input type="color" id="fcolor" size="7" maxlength="7" value="#ffffff" class="watch">
+    </div>
+    <div class="param-row">
+    <label for="scolor">Outline Color</label>
     <input type="color" id="scolor" size="7" maxlength="7" value="#000000" class="watch">
+    </div>
+    <div class="param-row">
+    <label for="txtstart">Text Size Start</label>
     <input type="text" id="txtstart" size="10" maxlength="10" value="140" class="watch">
+    </div>
+    <div class="param-row">
+    <label for="txtamp">Text Size Range</label>
     <input type="text" id="txtamp" size="10" maxlength="10" value="15" class="watch">
+    </div>
+    <div class="param-row">
+    <label for="rotamp">Text Rotation Range</label>
     <input type="text" id="rotamp" size="10" maxlength="10" value="15" class="watch">
+    </div>
     </div>
 
 </body>
