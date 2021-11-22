@@ -81,6 +81,7 @@ function doit(params, preview) {
   if (!params) {
     params = get_params()
   }
+  clear();
   // background
   //drawbackground(width / 2, height / 2, 300, idx*6, params.color1, 25, params.color2, 35);
   drawbackground2(width / 2, height / 2, idx*6, params)
