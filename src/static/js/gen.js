@@ -34,6 +34,7 @@ function get_params() {
   params.txt = select('#inptext').elt.value
   params.fcolor = select('#fcolor').elt.value
   params.scolor = select('#scolor').elt.value
+  params.ssize= select('#ssize').elt.value
   params.txtstart = parseInt(select('#txtstart').elt.value)
   params.txtamp = parseInt(select('#txtamp').elt.value)
   params.rotamp = parseInt(select('#rotamp').elt.value)
@@ -79,7 +80,7 @@ function doit(params, preview) {
   drawbackground(width / 2, height / 2, 300, idx*6, params.color1, 25, params.color2, 35);
 
   // text
-  drawtext(width / 2, height / 2, idx, params.txt, params.fcolor, params.scolor, params.txtstart, params.txtamp, params.rotamp)
+  drawtext(width / 2, height / 2, idx, params.txt, params.fcolor, params.scolor, params.ssize, params.txtstart, params.txtamp, params.rotamp)
 
   if (!preview) {
   gif.addFrame(cnv.elt, {
@@ -97,11 +98,15 @@ function doit(params, preview) {
   }
 }
 
-function drawtext(x, y, idx, txt, fcolor, scolor, txtstart, txtamp, rotamp ){
+function drawtext(x, y, idx, txt, fcolor, scolor, ssize, txtstart, txtamp, rotamp ){
   textSize(get_tri(idx, txtamp, txtstart, 0));
   textAlign(CENTER, CENTER);
   stroke(scolor);
-  strokeWeight(10);
+  if (ssize > 0) {
+    strokeWeight(ssize);
+  } else {
+    noStroke();
+  };
   fill(fcolor);
   bbox = font.textBounds(txt, x, y)
   push()
