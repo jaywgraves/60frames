@@ -29,15 +29,20 @@ function setup() {
 
 function get_params() {
   params = {};
-  params.color1 = select('#color1').elt.value
-  params.color2 = select('#color2').elt.value
-  params.txt = select('#inptext').elt.value
+  // text
   params.fcolor = select('#fcolor').elt.value
   params.scolor = select('#scolor').elt.value
+  params.txt = select('#inptext').elt.value
   params.ssize= select('#ssize').elt.value
   params.txtstart = parseInt(select('#txtstart').elt.value)
   params.txtamp = parseInt(select('#txtamp').elt.value)
   params.rotamp = parseInt(select('#rotamp').elt.value)
+  // background
+  params.sectioncnt = parseInt(select('#sectioncnt').elt.value)
+  params.color1 = select('#color1').elt.value
+  params.color2 = select('#color2').elt.value
+  params.color3 = select('#color3').elt.value
+  params.color4 = select('#color4').elt.value
   return params
 }
 
@@ -77,7 +82,8 @@ function doit(params, preview) {
     params = get_params()
   }
   // background
-  drawbackground(width / 2, height / 2, 300, idx*6, params.color1, 25, params.color2, 35);
+  //drawbackground(width / 2, height / 2, 300, idx*6, params.color1, 25, params.color2, 35);
+  drawbackground2(width / 2, height / 2, idx*6, params)
 
   // text
   drawtext(width / 2, height / 2, idx, params.txt, params.fcolor, params.scolor, params.ssize, params.txtstart, params.txtamp, params.rotamp)
@@ -135,6 +141,57 @@ function drawbackground(x, y, arcsize, step, color1, sm_angle, color2, lg_angle)
     arc(x, y, arcsize, arcsize, step + angle, step + angle + lg_angle);
     angle += lg_angle;
   }
+  ellipse(x, y, 50, 50);
+}
+
+function drawbackground2(x, y, startangle, params){
+
+  // startangle = idx * 6 which is the starting spot of the arc
+  noStroke();
+  params.arcsize = 300;
+  angle = 0;
+  if (params.sectioncnt === 1) {
+    fill(params.color1);
+    arc(x, y, params.arcsize, params.arcsize, 0, 360);
+  } else if (params.sectioncnt === 2) {
+    for (let i = 0; i < 2; i++) {
+      fill(params.color1);
+      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 180);
+      angle += 180;
+      fill(params.color2);
+      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 180);
+      angle += 180;
+    }
+  } else if (params.sectioncnt === 3) {
+    for (let i = 0; i < 3; i++) {
+      fill(params.color1);
+      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 120);
+      angle += 120;
+      fill(params.color2);
+      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 120);
+      angle += 120;
+      fill(params.color3);
+      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 120);
+      angle += 120;
+    }
+  } else if (params.sectioncnt === 4) {
+    for (let i = 0; i < 4; i++) {
+      fill(params.color1);
+      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 90);
+      angle += 90;
+      fill(params.color2);
+      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 90);
+      angle += 90;
+      fill(params.color3);
+      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 90);
+      angle += 90;
+      fill(params.color4);
+      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 90);
+      angle += 90;
+    }
+  }
+
+  fill(params.color1);
   ellipse(x, y, 50, 50);
 }
 
