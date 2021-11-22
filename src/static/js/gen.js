@@ -99,6 +99,7 @@ function doit(params, preview) {
 }
 
 function drawtext(x, y, idx, txt, fcolor, scolor, ssize, txtstart, txtamp, rotamp ){
+  if (!txt) { return ;}
   textSize(get_tri(idx, txtamp, txtstart, 0));
   textAlign(CENTER, CENTER);
   stroke(scolor);
