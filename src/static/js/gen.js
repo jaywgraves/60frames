@@ -46,10 +46,6 @@ function get_params() {
     params.angles.push(angle)
     params.colors.push(select('#color' + (i +1)).elt.value)
   }
-  params.color1 = select('#color1').elt.value
-  params.color2 = select('#color2').elt.value
-  params.color3 = select('#color3').elt.value
-  params.color4 = select('#color4').elt.value
   return params
 }
 
@@ -90,9 +86,7 @@ function doit(params, preview) {
   }
   clear();
   // background
-  //drawbackground(width / 2, height / 2, 300, idx*6, params.color1, 25, params.color2, 35);
-  //drawbackground2(width / 2, height / 2, idx*6, params)
-  drawbackground3(width / 2, height / 2, idx*6, params)
+  drawbackground(width / 2, height / 2, idx*6, params)
 
   // text
   drawtext(width / 2, height / 2, idx, params.txt, params.fcolor, params.scolor, params.ssize, params.txtstart, params.txtamp, params.rotamp)
@@ -136,75 +130,7 @@ function drawtext(x, y, idx, txt, fcolor, scolor, ssize, txtstart, txtamp, rotam
   pop()
 }
 
-function drawbackground(x, y, arcsize, step, color1, sm_angle, color2, lg_angle) {
-  // draws 12 arcs, varying between color1/sm_angle and color2/lg_angle
-  // starting at a specific angular degree of 'step'
-  // and a circle of color2 in the middle of the canvas
-  noStroke();
-  let angle = 0;
-  for (let i = 0; i < 6; i++) {
-    fill(color1);
-    arc(x, y, arcsize, arcsize, step + angle, step + angle + sm_angle);
-    angle += sm_angle;
-    fill(color2);
-    arc(x, y, arcsize, arcsize, step + angle, step + angle + lg_angle);
-    angle += lg_angle;
-  }
-  ellipse(x, y, 50, 50);
-}
-
-function drawbackground2(x, y, startangle, params){
-
-  // startangle = idx * 6 which is the starting spot of the arc
-  noStroke();
-  params.arcsize = 300;
-  angle = 0;
-  if (params.sectioncnt === 1) {
-    fill(params.color1);
-    arc(x, y, params.arcsize, params.arcsize, 0, 360);
-  } else if (params.sectioncnt === 2) {
-    for (let i = 0; i < 2; i++) {
-      fill(params.color1);
-      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 180);
-      angle += 180;
-      fill(params.color2);
-      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 180);
-      angle += 180;
-    }
-  } else if (params.sectioncnt === 3) {
-    for (let i = 0; i < 3; i++) {
-      fill(params.color1);
-      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 120);
-      angle += 120;
-      fill(params.color2);
-      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 120);
-      angle += 120;
-      fill(params.color3);
-      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 120);
-      angle += 120;
-    }
-  } else if (params.sectioncnt === 4) {
-    for (let i = 0; i < 4; i++) {
-      fill(params.color1);
-      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 90);
-      angle += 90;
-      fill(params.color2);
-      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 90);
-      angle += 90;
-      fill(params.color3);
-      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 90);
-      angle += 90;
-      fill(params.color4);
-      arc(x, y, params.arcsize, params.arcsize, startangle + angle, startangle + angle + 90);
-      angle += 90;
-    }
-  }
-
-  fill(params.color1);
-  ellipse(x, y, 50, 50);
-}
-
-function drawbackground3(x, y, startangle, params){
+function drawbackground(x, y, startangle, params){
   // startangle = idx * 6 which is the starting spot of the arc
   noStroke();
   params.arcsize = 300;
