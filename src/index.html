@@ -12,14 +12,17 @@
     }
     .container {
       display: grid;
-      grid-template-columns: 30% 1fr 1fr 30%;
-      gap: 0px 0px;
+      grid-template-columns: 20% 1fr 1fr 1fr 20%;
+      gap: 10px 10px;
       }
-    #left-col {
+    #preview-col {
        grid-column-start: 2;
        }
-    #right-col {
+    #text-col {
        grid-column-start: 3;
+       }
+    #bg-col {
+       grid-column-start: 4;
        }
     .param-row {
       display: grid;
@@ -43,14 +46,14 @@
 <body>
   <center><h1>60 Frames</h1></center>
   <section class="container">
-  <div id="left-col">
+  <div id="preview-col">
     <div id="gifcanvas"></div>
     <input type="hidden" id="interval" size="10" maxlength="10" value="">
     <input type="button" id="start" value="start" onclick="start()">
     <input type="button" id="stop" value="stop" onclick="stop()">
     <input type="button" id="save" value="save" onclick="saveemoji()">
   </div>
-  <div id="right-col">
+  <div id="text-col">
     <strong>Text</strong>
     <div class="param-row">
       <label for="inptext">Text</label>
@@ -80,6 +83,8 @@
       <label for="rotamp">Text Rotation Range</label>
       <input type="text" id="rotamp" size="10" maxlength="10" value="15" class="watch">
     </div>
+  </div>
+  <div id="bg-col">
     <strong>Background</strong>
     <div class="param-row">
       <label for="sectioncnt">Section Count</label>
