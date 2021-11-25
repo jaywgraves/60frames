@@ -80,6 +80,7 @@ function saveemoji() {
 
 
 function doit(params, preview) {
+  document.querySelector("#frameidx").value = idx;
   if (!params) {
     params = get_params()
   }
@@ -163,6 +164,7 @@ function setupGIF() {
 }
 
 function resetUI() {
+  document.querySelector("#frameidx").value = idx;
   var sectioncnt = parseInt(document.querySelector("#sectioncnt").value);
   var last_sectioncnt_elem = document.querySelector("#last_sectioncnt");
   var last_sectioncnt = parseInt(last_sectioncnt_elem.value);
