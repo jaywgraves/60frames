@@ -43,7 +43,8 @@ function get_params() {
   params.colors = []
   angle = 360 / params.sectioncnt
   for (i=0; i < params.sectioncnt; i++) {
-    params.angles.push(angle)
+    //params.angles.push(angle)
+    params.angles.push(parseInt(select('#angle' + (i +1)).elt.value))
     params.colors.push(select('#color' + (i +1)).elt.value)
   }
   return params
@@ -164,13 +165,24 @@ function setupGIF() {
 }
 
 function resetUI() {
-  var sectioncnt = document.querySelector("#sectioncnt").value;
+  var sectioncnt = parseInt(document.querySelector("#sectioncnt").value);
+  var last_sectioncnt_elem = document.querySelector("#last_sectioncnt");
+  var last_sectioncnt = parseInt(last_sectioncnt_elem.value);
+  a = 360 / sectioncnt;
   for (i=1; i<13; i++) {
     color_elem = document.querySelector("#color" + i);
+    angle_elem = document.querySelector("#angle" + i);
     if (i <= sectioncnt) {
       color_elem.parentNode.style.visibility = 'visible'
+      if (sectioncnt != last_sectioncnt) {
+        angle_elem.value = a;
+      }
     } else {
       color_elem.parentNode.style.visibility = 'hidden'
+      if (sectioncnt != last_sectioncnt) {
+        angle_elem.value = 0;
+      }
     }
+  last_sectioncnt_elem.value  = sectioncnt;
   }
 }
