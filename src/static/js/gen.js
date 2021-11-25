@@ -162,3 +162,15 @@ function setupGIF() {
       delete gif.nextFrame;
   });
 }
+
+function resetUI() {
+  var sectioncnt = document.querySelector("#sectioncnt").value;
+  for (i=1; i<13; i++) {
+    color_elem = document.querySelector("#color" + i);
+    if (i <= sectioncnt) {
+      color_elem.parentNode.style.visibility = 'visible'
+    } else {
+      color_elem.parentNode.style.visibility = 'hidden'
+    }
+  }
+}

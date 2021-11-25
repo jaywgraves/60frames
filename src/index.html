@@ -139,6 +139,12 @@
       <input type="color" id="color12" size="7" maxlength="7" value="#330000" class="watch">
     </div>
   </div>
+<script>
+resetUI();
+document.querySelectorAll('.watch').forEach(function(el) {
+  el.addEventListener('change', resetUI);
+});
+</script>
 </body>
 
 </html>
