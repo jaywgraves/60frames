@@ -41,11 +41,9 @@ function get_params() {
   params.sectioncnt = parseInt(select('#sectioncnt').elt.value)
   params.angles = []
   params.colors = []
-  angle = 360 / params.sectioncnt
   for (i=0; i < params.sectioncnt; i++) {
-    //params.angles.push(angle)
-    params.angles.push(parseInt(select('#angle' + (i +1)).elt.value))
-    params.colors.push(select('#color' + (i +1)).elt.value)
+    params.angles.push(parseInt(select('#angle' + (i+1)).elt.value))
+    params.colors.push(select('#color' + (i+1)).elt.value)
   }
   return params
 }
