@@ -78,6 +78,13 @@ function saveemoji() {
   interval_elem.elt.value = interval_id
 }
 
+function setindex() {
+  stop()
+  idx = parseInt(document.querySelector('#frameidx').value)
+  params = get_params();
+  doit(params, true)
+}
+
 
 function doit(params, preview) {
   document.querySelector("#frameidx").value = idx;
