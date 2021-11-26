@@ -100,7 +100,7 @@ function doit(params, preview) {
   drawbackground(width / 2, height / 2, idx*6, params)
 
   // text
-  drawtext(width / 2, height / 2, idx, params.txt, params.fcolor, params.scolor, params.ssize, params.txtstart, params.txtamp, params.rotamp)
+  drawtext(width / 2, height / 2, idx, params)
 
   if (!preview) {
   gif.addFrame(cnv.elt, {
@@ -119,26 +119,30 @@ function doit(params, preview) {
   document.querySelector("#frameidx").value = idx;
 }
 
-function drawtext(x, y, idx, txt, fcolor, scolor, ssize, txtstart, txtamp, rotamp ){
-  if (!txt) { return ;}
-  textSize(get_tri(idx, txtamp, txtstart, 0));
+function drawtext(x, y, idx, params){
+  if (!params.txt) { return ;}
+  scolor = color(params.scolor)
+  //scolor.setAlpha(params.scoloralpha)
+  fcolor = color(params.fcolor)
+  //fcolor.setAlpha(params.fcoloralpha)
+  textSize(get_tri(idx, params.txtamp, params.txtstart, 0));
   textAlign(CENTER, CENTER);
-  stroke(scolor);
-  if (ssize > 0) {
-    strokeWeight(ssize);
+  if (params.ssize > 0) {
+    stroke(scolor);
+    strokeWeight(params.ssize);
   } else {
     noStroke();
   };
   fill(fcolor);
-  bbox = font.textBounds(txt, x, y)
+  bbox = font.textBounds(params.txt, x, y)
   push()
   dx = bbox.x + (bbox.w / 2)
   dy = bbox.y + (bbox.h / 2)
   translate(dx , dy)
-  rotate(get_tri(idx, rotamp, 0, 0))
+  rotate(get_tri(idx, params.rotamp, 0, 0))
   translate(-dx , -dy)
   //rect(bbox.x, bbox.y, bbox.w, bbox.h)  //debug bounding box
-  text(txt, x, y);
+  text(params.txt, x, y);
   pop()
 }
 
