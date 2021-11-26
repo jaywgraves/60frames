@@ -52,8 +52,11 @@
   <div id="preview-col">
     <div id="gifcanvas"></div>
     <input type="hidden" id="interval" size="10" maxlength="10" value="">
+    <!-- idx was incremented at the end of the last frame.  so to go back to the previous frame we need to substract 2 -->
+    <input type="button" id="frame_dec" value="<" onclick="setindex(-2)">
     <input type="button" id="start" value="start" onclick="start()">
     <input type="button" id="stop" value="stop" onclick="stop()">
+    <input type="button" id="frame_inc" value=">" onclick="setindex(1)">
     <input type="button" id="save" value="save" onclick="saveemoji()">
     <input type="range" id="frameidx" min="0" max="59" oninput="setindex()">
   </div>

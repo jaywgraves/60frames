@@ -78,16 +78,19 @@ function saveemoji() {
   interval_elem.elt.value = interval_id
 }
 
-function setindex() {
+function setindex(x) {
   stop()
-  idx = parseInt(document.querySelector('#frameidx').value)
+  if (typeof x == 'undefined') {
+    idx = parseInt(document.querySelector('#frameidx').value)
+  } else {
+    idx += x
+  }
   params = get_params();
   doit(params, true)
 }
 
 
 function doit(params, preview) {
-  document.querySelector("#frameidx").value = idx;
   if (!params) {
     params = get_params()
   }
@@ -105,13 +108,14 @@ function doit(params, preview) {
         });
   }
   idx += 1;
-  if (idx === 60 ) {
+  if (idx >= 60 ) {
     idx = 0;
     if (!preview) {
       clearInterval(interval_id)
       gif.render();
     }
   }
+  document.querySelector("#frameidx").value = idx;
 }
 
 function drawtext(x, y, idx, txt, fcolor, scolor, ssize, txtstart, txtamp, rotamp ){
