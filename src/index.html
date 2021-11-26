@@ -35,10 +35,7 @@
     .param-row input[type="color"] {
       grid-column-start: 2;
     }
-    .param-row input[type="text"] {
-      grid-column-start: 3;
-    }
-    .param-row input[type="number"] {
+    .param-row input[type="text"],input[type="number"],select {
       grid-column-start: 3;
     }
   </style>
@@ -95,7 +92,19 @@
     <strong>Background</strong>
     <div class="param-row">
       <label for="sectioncnt">Section Count</label>
-      <input type="text" id="sectioncnt" size="2" maxlength="2" value="2" class="watch">
+      <select id="sectioncnt" class="watch">
+        <option value="1">1</option>
+        <option value="2" selected>2</option>
+        <option value="3">3</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="12">12</option>
+      </select>
     </div>
     <div class="param-row">
       <label for="color1">Color 1</label>
