@@ -25,6 +25,7 @@ function setup() {
   textFont(font);
   angleMode(DEGREES);
   setupGIF();
+  setindex();
 }
 
 function get_params() {
