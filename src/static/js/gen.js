@@ -137,31 +137,33 @@ function drawtext(x, y, idx, params){
   fcolor = color(fcolor)
   fcolor.setAlpha(128)
   fill(fcolor);
-  bbox = font.textBounds(params.txt, x, y)
+  WEIRD_Y = -10
+  bbox = font.textBounds(params.txt, x, y+WEIRD_Y)
   push()
   dx = bbox.x + (bbox.w / 2)
-  if (dx > 100) {
-    j = dx - 100
-    dx = dx - j;
-  } else {
-    j = 100 - dx
-    dx = dx + j; 
-  }
+  //if (dx > 100) {
+  //  j = dx - 100
+  //  dx = dx - j;
+  //} else {
+  //  j = 100 - dx
+  //  dx = dx + j;
+  //}
   dy = bbox.y + (bbox.h / 2)
-  if (dy > 100) {
-    j = dy - 100
-    dy = dy - j;
-  } else {
-    j = 100 - dy
-    dy = dy + j; 
-  }
+  //if (dy > 100) {
+  //  j = dy - 100
+  //  dy = dy - j;
+  //} else {
+  //  j = 100 - dy
+  //  dy = dy + j;
+  //}
   //console.log(idx, bbox.x, bbox.y, bbox.w, bbox.h , dx,dy)
+  dy = dy + WEIRD_Y
   circle(dx,dy,10)
   translate(dx , dy)
   rotate(get_tri(idx, params.rotamp, 0, 0))
   translate(-dx , -dy)
   rect(bbox.x, bbox.y, bbox.w, bbox.h)  //debug bounding box
-  text(params.txt, x, y);
+  text(params.txt, x, y+WEIRD_Y);
   pop()
 }
 
