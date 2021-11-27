@@ -181,9 +181,9 @@ function setupGIF() {
 }
 colorcfg = {
   1 : {default:1, enabled: [1]},
-  2 : {default:2, enabled: [2,4,6,8,10,12]},
-  3 : {default:3, enabled: [3,6,9,12]},
-  4 : {default:4, enabled: [4,8,12]},
+  2 : {default:8, enabled: [2,4,6,8,10,12]},
+  3 : {default:9, enabled: [3,6,9,12]},
+  4 : {default:8, enabled: [4,8,12]},
   5 : {default:5, enabled: [5,10]},
   6 : {default:6, enabled: [6,12]},
   8 : {default:8, enabled: [8]},
