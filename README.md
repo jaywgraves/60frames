@@ -14,4 +14,4 @@ Includes [p5.js](https://p5js.org/) which is licensed LGPL.
 
 Includes [gif.js](http://jnordberg.github.io/gif.js/) which is licensed under [MIT](https://github.com/jnordberg/gif.js/blob/master/LICENSE).
 
-Includes [Ubuntu font](https://design.ubuntu.com/font/) which is licensed under the [Ubunto font license](https://ubuntu.com/legal/font-licence)
+Includes [Ubuntu font](https://design.ubuntu.com/font/) which is licensed under the [Ubuntu font license](https://ubuntu.com/legal/font-licence)
