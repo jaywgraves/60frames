@@ -49,6 +49,7 @@
   <center><h1>60 Frames</h1></center>
   <section class="container">
   <input type="hidden" id="last_sectioncnt" value="">
+  <input type="hidden" id="last_colorcnt" value="">
   <div id="preview-col">
     <div id="gifcanvas"></div>
     <input type="hidden" id="interval" size="10" maxlength="10" value="">
@@ -93,6 +94,21 @@
   </div>
   <div id="bg-col">
     <strong>Background</strong>
+    <div class="param-row">
+      <label for="colorcnt">Color Count</label>
+      <select id="colorcnt" class="watch">
+        <option value="1">1</option>
+        <option value="2" selected>2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="12">12</option>
+      </select>
+    </div>
     <div class="param-row">
       <label for="sectioncnt">Section Count</label>
       <select id="sectioncnt" class="watch">

@@ -39,10 +39,11 @@ function get_params() {
   params.txtamp = parseInt(select('#txtamp').elt.value)
   params.rotamp = parseInt(select('#rotamp').elt.value)
   // background
+  params.colorcnt = parseInt(select('#colorcnt').elt.value)
   params.sectioncnt = parseInt(select('#sectioncnt').elt.value)
   params.angles = []
   params.colors = []
-  for (i=0; i < params.sectioncnt; i++) {
+  for (i=0; i < params.colorcnt; i++) {
     params.angles.push(parseInt(select('#angle' + (i+1)).elt.value))
     params.colors.push(select('#color' + (i+1)).elt.value)
   }
@@ -178,17 +179,50 @@ function setupGIF() {
       delete gif.nextFrame;
   });
 }
+colorcfg = {
+  1 : {default:1, enabled: [1]},
+  2 : {default:2, enabled: [2,4,6,8,10,12]},
+  3 : {default:3, enabled: [3,6,9,12]},
+  4 : {default:4, enabled: [4,8,12]},
+  5 : {default:5, enabled: [5,10]},
+  6 : {default:6, enabled: [6,12]},
+  8 : {default:8, enabled: [8]},
+  9 : {default:9, enabled: [9]},
+  10 : {default:10, enabled: [10]},
+  12 : {default:12, enabled: [12]}
+}
 
 function resetUI() {
   document.querySelector("#frameidx").value = idx;
-  var sectioncnt = parseInt(document.querySelector("#sectioncnt").value);
+  var colorcnt = parseInt(document.querySelector("#colorcnt").value);
+  var last_colorcnt_elem = document.querySelector("#last_colorcnt");
+  var last_colorcnt = parseInt(last_colorcnt_elem.value);
+  var sectioncnt_elem = document.querySelector("#sectioncnt");
+  var sectioncnt = parseInt(sectioncnt_elem.value);
   var last_sectioncnt_elem = document.querySelector("#last_sectioncnt");
   var last_sectioncnt = parseInt(last_sectioncnt_elem.value);
+  cfg = colorcfg[colorcnt];
+  if (colorcnt != last_colorcnt) {
+    last_sectioncnt = -1
+    for (i=0; i < sectioncnt_elem.options.length; i++) {
+      o = sectioncnt_elem.options[i]
+      if (cfg.enabled.includes(parseInt(o.value))) {
+        o.disabled = false;
+      } else {
+        o.disabled = true;
+      }
+      if (o.value === String(cfg.default)) {
+        o.selected = true;
+      }
+    }
+  }
+
+  sectioncnt = parseInt(sectioncnt_elem.value);
   a = 360 / sectioncnt;
   for (i=1; i<13; i++) {
     color_elem = document.querySelector("#color" + i);
     angle_elem = document.querySelector("#angle" + i);
-    if (i <= sectioncnt) {
+    if (i <= colorcnt) {
       color_elem.parentNode.style.visibility = 'visible'
       if (sectioncnt != last_sectioncnt) {
         angle_elem.value = a;
@@ -200,5 +234,6 @@ function resetUI() {
       }
     }
   last_sectioncnt_elem.value  = sectioncnt;
+  last_colorcnt_elem.value  = colorcnt;
   }
 }
