@@ -5,6 +5,7 @@ var sketch = function(p) {
   p.idx = 0;
   p.interval_id = 0;
   p.font = null;
+  p.params = {}
 
   p.get_sin = function(idx, a, k, h){
     x = ((2*Math.PI)/60)*idx;
@@ -30,32 +31,29 @@ var sketch = function(p) {
     p.setindex();
   }
 
-  p.get_params = function() {
-    params = {};
+  p.load_params = function() {
     // text
-    params.fcolor = p.select('#fcolor').elt.value
-    params.scolor = p.select('#scolor').elt.value
-    params.txt = p.select('#inptext').elt.value
-    params.ssize= p.select('#ssize').elt.value
-    params.txtstart = parseInt(p.select('#txtstart').elt.value)
-    params.txtamp = parseInt(p.select('#txtamp').elt.value)
-    params.rotamp = parseInt(p.select('#rotamp').elt.value)
+    p.params.fcolor = p.select('#fcolor').elt.value
+    p.params.scolor = p.select('#scolor').elt.value
+    p.params.txt = p.select('#inptext').elt.value
+    p.params.ssize= p.select('#ssize').elt.value
+    p.params.txtstart = parseInt(p.select('#txtstart').elt.value)
+    p.params.txtamp = parseInt(p.select('#txtamp').elt.value)
+    p.params.rotamp = parseInt(p.select('#rotamp').elt.value)
     // background
-    params.colorcnt = parseInt(p.select('#colorcnt').elt.value)
-    params.sectioncnt = parseInt(p.select('#sectioncnt').elt.value)
-    params.angles = []
-    params.colors = []
-    for (i=0; i < params.colorcnt; i++) {
-      params.angles.push(parseInt(p.select('#angle' + (i+1)).elt.value))
-      params.colors.push(p.select('#color' + (i+1)).elt.value)
+    p.params.colorcnt = parseInt(p.select('#colorcnt').elt.value)
+    p.params.sectioncnt = parseInt(p.select('#sectioncnt').elt.value)
+    p.params.angles = []
+    p.params.colors = []
+    for (i=0; i < p.params.colorcnt; i++) {
+      p.params.angles.push(parseInt(p.select('#angle' + (i+1)).elt.value))
+      p.params.colors.push(p.select('#color' + (i+1)).elt.value)
     }
-    return params
   }
 
   p.start = function() {
-    preview = true;
     p.doit2 =function(){
-      p.doit(null, preview)
+      p.doit(true)
     }
     p.interval_id = setInterval(p.doit2, 40);
     p.interval_elem = p.select('#interval')
@@ -71,10 +69,8 @@ var sketch = function(p) {
   p.saveemoji = function() {
     p.stop()
     p.idx = 0
-    p.params = p.get_params();
-    preview = false;
     p.doit2 = function(){
-      p.doit(params, preview)
+      p.doit(false)
     }
 
     p.interval_id = setInterval(p.doit2, 40);
@@ -85,25 +81,21 @@ var sketch = function(p) {
   p.setindex = function(x) {
     p.stop()
     if (typeof x == 'undefined') {
-      idx = parseInt(document.querySelector('#frameidx').value)
+      p.idx = parseInt(document.querySelector('#frameidx').value)
     } else {
-      idx += x
+      p.idx += x
     }
-    p.params = p.get_params();
-    p.doit(p.params, true)
+    p.doit(true)
   }
 
 
-  p.doit = function(params, preview) {
-    if (!params) {
-      params = p.get_params()
-    }
+  p.doit = function(preview) {
     p.clear();
     // background
-    p.drawbackground(p.width / 2, p.height / 2, p.idx*6, params)
+    p.drawbackground(p.width / 2, p.height / 2, p.idx*6)
 
     // text
-    p.drawtext(p.width / 2, p.height / 2, p.idx, params)
+    p.drawtext(p.width / 2, p.height / 2, p.idx)
 
     if (!preview) {
     p.gif.addFrame(p.cnv.elt, {
@@ -122,47 +114,47 @@ var sketch = function(p) {
     document.querySelector("#frameidx").value = p.idx;
   }
 
-  p.drawtext = function(x, y, idx, params){
-    if (!params.txt) { return ;}
-    scolor = p.color(params.scolor)
+  p.drawtext = function(x, y, idx){
+    if (!p.params.txt) { return ;}
+    scolor = p.color(p.params.scolor)
     //scolor.setAlpha(params.scoloralpha)
-    fcolor = p.color(params.fcolor)
+    fcolor = p.color(p.params.fcolor)
     //fcolor.setAlpha(params.fcoloralpha)
-    p.textSize(p.get_tri(idx, params.txtamp, params.txtstart, 0));
+    p.textSize(p.get_tri(idx, p.params.txtamp, p.params.txtstart, 0));
     p.textAlign(p.CENTER, p.CENTER);
-    if (params.ssize > 0) {
+    if (p.params.ssize > 0) {
       p.stroke(scolor);
-      p.strokeWeight(params.ssize);
+      p.strokeWeight(p.params.ssize);
     } else {
       p.noStroke();
     };
     p.fill(fcolor);
-    bbox = p.font.textBounds(params.txt, x, y)
+    bbox = p.font.textBounds(p.params.txt, x, y)
     p.push()
     dx = bbox.x + (bbox.w / 2)
     dy = bbox.y + (bbox.h / 2)
     p.translate(dx , dy)
-    p.rotate(p.get_tri(idx, params.rotamp, 0, 0))
+    p.rotate(p.get_tri(idx, p.params.rotamp, 0, 0))
     p.translate(-dx , -dy)
     //p.rect(bbox.x, bbox.y, bbox.w, bbox.h)  //debug bounding box
-    p.text(params.txt, x, y);
+    p.text(p.params.txt, x, y);
     p.pop()
   }
 
-  p.drawbackground = function(x, y, startangle, params){
+  p.drawbackground = function(x, y, startangle){
     // startangle = idx * 6 which is the starting spot of the arc
     p.noStroke();
-    params.arcsize = 300;
+    p.params.arcsize = 300;
     angle = 0;
-    for (let i = 0; i < params.sectioncnt; i++) {
-        p.fill(params.colors[i % params.colors.length]);
+    for (let i = 0; i < p.params.sectioncnt; i++) {
+        p.fill(p.params.colors[i % p.params.colors.length]);
         arcbeg = startangle + angle
-        arcend = arcbeg + params.angles[i % params.angles.length]
-        p.arc(x, y, params.arcsize, params.arcsize, arcbeg, arcend);
-        angle += params.angles[i % params.angles.length];
+        arcend = arcbeg + p.params.angles[i % p.params.angles.length]
+        p.arc(x, y, p.params.arcsize, p.params.arcsize, arcbeg, arcend);
+        angle += p.params.angles[i % p.params.angles.length];
       }
 
-    p.fill(params.colors[0]);
+    p.fill(p.params.colors[0]);
     p.ellipse(x, y, 50, 50);
   }
 
@@ -199,7 +191,7 @@ colorcfg = {
 }
 
 resetUI = function() {
-  //document.querySelector("#frameidx").value = idx;
+  document.querySelector("#frameidx").value = sf.idx;
   var colorcnt = parseInt(document.querySelector("#colorcnt").value);
   var last_colorcnt_elem = document.querySelector("#last_colorcnt");
   var last_colorcnt = parseInt(last_colorcnt_elem.value);
@@ -242,4 +234,5 @@ resetUI = function() {
   last_sectioncnt_elem.value  = sectioncnt;
   last_colorcnt_elem.value  = colorcnt;
   }
+  sf.load_params();
 }
