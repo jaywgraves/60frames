@@ -64,6 +64,7 @@ var sketch = function(p) {
     p.interval_elem = p.select('#interval')
     p.interval_id = p.interval_elem.elt.value
     clearInterval(p.interval_id)
+    p.interval_id = null;
   }
 
   p.saveemoji = function() {
@@ -235,4 +236,7 @@ resetUI = function() {
   last_colorcnt_elem.value  = colorcnt;
   }
   sf.load_params();
+  if (sf.interval_id !== 0) {
+    sf.doit(true);
+  }
 }
