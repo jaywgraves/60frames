@@ -44,6 +44,8 @@ var sketch = function(p) {
     p.params.rotamp = parseInt(p.select('#rotamp').elt.value)
     // background
     p.params.arcsize= parseInt(p.select('#arcsize').elt.value)
+    p.params.centercirclesize= parseInt(p.select('#centercirclesize').elt.value)
+    p.params.centercirclecolor = p.select('#centercirclecolor').elt.value
     p.params.colorcnt = parseInt(p.select('#colorcnt').elt.value)
     p.params.sectioncnt = parseInt(p.select('#sectioncnt').elt.value)
     p.params.angles = []
@@ -161,8 +163,10 @@ var sketch = function(p) {
         angle += p.params.angles[i % p.params.angles.length];
       }
 
-    p.fill(p.params.colors[0]);
-    p.ellipse(x, y, 50, 50);
+    if (p.params.centercirclesize > 0) {
+      p.fill(p.params.centercirclecolor);
+      p.ellipse(x, y, p.params.centercirclesize, p.params.centercirclesize);
+    }
   }
 
   p.setupGIF = function() {
