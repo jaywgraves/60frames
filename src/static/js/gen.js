@@ -95,10 +95,14 @@ var sketch = function(p) {
   p.doit = function(preview) {
     p.clear();
     // background
-    p.drawbackground(p.width / 2, p.height / 2, p.idx*6)
+    bg_x = p.width / 2
+    bg_y = p.height / 2
+    p.drawbackground(bg_x, bg_y, p.idx*6)
 
     // text
-    p.drawtext(p.width / 2, p.height / 2, p.idx)
+    txt_x = p.width / 2
+    txt_y = p.height / 2
+    p.drawtext(txt_x, txt_y, p.idx)
 
     if (!preview) {
     p.gif.addFrame(p.cnv.elt, {
