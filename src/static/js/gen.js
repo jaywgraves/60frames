@@ -8,11 +8,13 @@ var sketch = function(p) {
   p.params = {}
 
   p.get_sin = function(idx, a, k, h){
+    var x;
     x = ((2*Math.PI)/60)*idx;
     return a * Math.sin(x+h) + k;
   }
 
   p.get_tri = function(idx, a, k, h){
+    var x;
     x = ((2*Math.PI)/60)*idx;
     return (2*a)/Math.PI * (Math.asin(Math.sin(x + h))) + k;
   }
