@@ -43,6 +43,7 @@ var sketch = function(p) {
     p.params.txtamp = parseInt(p.select('#txtamp').elt.value)
     p.params.rotamp = parseInt(p.select('#rotamp').elt.value)
     // background
+    p.params.arcsize= parseInt(p.select('#arcsize').elt.value)
     p.params.colorcnt = parseInt(p.select('#colorcnt').elt.value)
     p.params.sectioncnt = parseInt(p.select('#sectioncnt').elt.value)
     p.params.angles = []
@@ -151,7 +152,6 @@ var sketch = function(p) {
   p.drawbackground = function(x, y, startangle){
     // startangle = idx * 6 which is the starting spot of the arc
     p.noStroke();
-    p.params.arcsize = 300;
     angle = 0;
     for (let i = 0; i < p.params.sectioncnt; i++) {
         p.fill(p.params.colors[i % p.params.colors.length]);
