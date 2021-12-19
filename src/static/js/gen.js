@@ -147,7 +147,9 @@ var sketch = function(p) {
     p.rotate(p.get_tri(idx, p.params.rotamp, 0, 0))
     p.translate(-dx , -dy)
     //p.rect(bbox.x, bbox.y, bbox.w, bbox.h)  //debug bounding box
-    p.text(p.params.txt, x, y);
+    adj_x = 100 - dx;
+    adj_y = 100 - dy;
+    p.text(p.params.txt, x + adj_x, y + adj_y);
     p.pop()
   }
 
