@@ -19,6 +19,10 @@ var sketch = function(p) {
     return (2*a)/Math.PI * (Math.asin(Math.sin(x + h))) + k;
   }
 
+  p.get_circle = function(idx, speed){
+    return idx * (6*speed)
+  }
+
   p.preload = function(){
     p.font = p.loadFont('static/fonts/Ubuntu-B.ttf');
   }
@@ -40,8 +44,11 @@ var sketch = function(p) {
     p.params.txt = p.select('#inptext').elt.value
     p.params.ssize= p.select('#ssize').elt.value
     p.params.txtstart = parseInt(p.select('#txtstart').elt.value)
+    p.params.txtsizestyle = p.select("#txtsizestyle").elt.value
+    p.params.txtrotstyle = p.select("#txtrotstyle").elt.value
     p.params.txtamp = parseInt(p.select('#txtamp').elt.value)
     p.params.rotamp = parseInt(p.select('#rotamp').elt.value)
+    p.params.spinspeed = parseInt(p.select('#spinspeed').elt.value)
     // background
     p.params.arcsize= parseInt(p.select('#arcsize').elt.value)
     p.params.centercirclesize= parseInt(p.select('#centercirclesize').elt.value)
@@ -130,7 +137,18 @@ var sketch = function(p) {
     //scolor.setAlpha(params.scoloralpha)
     fcolor = p.color(p.params.fcolor)
     //fcolor.setAlpha(params.fcoloralpha)
-    p.textSize(p.get_tri(idx, p.params.txtamp, p.params.txtstart, 0));
+    var textSize;
+    switch (p.params.txtsizestyle) {
+      case 'tri':
+        textSize = p.get_tri(idx, p.params.txtamp, p.params.txtstart, 0);
+        break;
+      case 'sin':
+        textSize = p.get_sin(idx, p.params.txtamp, p.params.txtstart, 0);
+        break;
+      default:
+        textSize = p.get_sin(idx, p.params.txtamp, p.params.txtstart, 0);
+    }
+    p.textSize(textSize);
     p.textAlign(p.CENTER, p.CENTER);
     if (p.params.ssize > 0) {
       p.stroke(scolor);
@@ -144,7 +162,21 @@ var sketch = function(p) {
     dx = bbox.x + (bbox.w / 2)
     dy = bbox.y + (bbox.h / 2)
     p.translate(dx , dy)
-    p.rotate(p.get_tri(idx, p.params.rotamp, 0, 0))
+    var textRotate;
+    switch (p.params.txtrotstyle) {
+      case 'tri':
+        textRotate = p.get_tri(idx, p.params.rotamp, 0, 0);
+        break;
+      case 'sin':
+        textRotate= p.get_sin(idx, p.params.rotamp, 0, 0);
+        break;
+      case 'circ':
+        textRotate= p.get_circle(idx, p.params.spinspeed);
+        break;
+      default:
+        textRotate= p.get_sin(idx, p.params.rotamp, 0, 0);
+    }
+    p.rotate(textRotate)
     p.translate(-dx , -dy)
     //p.rect(bbox.x, bbox.y, bbox.w, bbox.h)  //debug bounding box
     adj_x = 100 - dx;
