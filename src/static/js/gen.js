@@ -121,6 +121,9 @@ var sketch = function(p) {
           });
     }
     p.idx += 1;
+    if (p.idx < 0) {
+      p.idx = 60 + p.idx
+    }
     if (p.idx >= 60 ) {
       p.idx = 0;
       if (!preview) {
