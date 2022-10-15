@@ -64,10 +64,10 @@ var sketch = function(p) {
   }
 
   p.start = function() {
-    p.doit2 =function(){
-      p.doit(true)
+    p.all_frames =function(){
+      p.current_frame(true)
     }
-    p.interval_id = setInterval(p.doit2, 40);
+    p.interval_id = setInterval(p.all_frames, 40);
     p.interval_elem = p.select('#interval')
     p.interval_elem.elt.value = p.interval_id
   }
@@ -82,11 +82,11 @@ var sketch = function(p) {
   p.saveemoji = function() {
     p.stop()
     p.idx = 0
-    p.doit2 = function(){
-      p.doit(false)
+    p.all_frames= function(){
+      p.current_frame(false)
     }
 
-    p.interval_id = setInterval(p.doit2, 40);
+    p.interval_id = setInterval(p.all_frames, 40);
     p.interval_elem = p.select('#interval')
     p.interval_elem.elt.value = p.interval_id
   }
@@ -98,11 +98,11 @@ var sketch = function(p) {
     } else {
       p.idx += x
     }
-    p.doit(true)
+    p.current_frame(true)
   }
 
 
-  p.doit = function(preview) {
+  p.current_frame = function(preview) {
     p.clear();
     // background
     bg_x = p.width / 2
@@ -284,6 +284,6 @@ resetUI = function() {
   }
   sf.load_params();
   if (sf.interval_id !== 0) {
-    sf.doit(true);
+    sf.current_frame(true);
   }
 }
